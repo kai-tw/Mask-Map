@@ -3,16 +3,24 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1" name="viewport">
-		<title>藥局口罩販售地圖</title>
-		<link as="script" rel="preload" href="leaflet/leaflet.js">
-		<link as="script" rel="preload" href="main.js">
-		<link as="style" rel="preload" href="leaflet/leaflet.css">
-		<link as="style" rel="preload" href="main.css">
-	</head>
-	<body>
-		<div id="app"></div>
+		<title>口罩地圖</title>
 		<link rel="stylesheet" href="leaflet/leaflet.css">
 		<link rel="stylesheet" href="main.css">
-		<script async src="main.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+TC&display=swap">
+	</head>
+	<body>
+		<div id="information">
+			<h1 id="logo">口罩地圖</h1>
+			<div id="purchase-information">
+				<span id="parity"></span><span id="day"></span>
+			</div>
+			<div class="sufficient">100 個以上</div>
+			<div class="warning">40 ~ 99 個</div>
+			<div class="emergency">1 ~ 39 個</div>
+			<div class="sold-out">無存貨</div>
+			<div id="description">圓圈中的數字代表該區域的店家數量</div>
+		</div>
+		<div id="app"></div>
+		<script async data-main="main" src="require.js"></script>
 	</body>
 </html>

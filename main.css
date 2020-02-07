@@ -1,7 +1,102 @@
+html {
+	font: 18px/2 "Noto Sans","Noto Sans TC", sans-serif;
+	color: #333
+}
 body {
-	margin: 0
+	position: relative;
+	flex-direction: row;
+	margin: 0;
+	overflow: hidden
+}
+#information {
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	border-radius: 1rem;
+	padding: 1rem;
+	max-width: 200px;
+	background: rgba(255,255,255,.8);
+	box-sizing: border-box;
+	text-align: center;
+	overflow: hidden;
+	z-index: 1000
+}
+#logo {
+	margin: 0;
+	font-size: 1rem;
+}
+#purchase-information #parity {
+	margin-right: 1rem;
+	font-size: 2rem;
+	font-weight: bold
+}
+#purchase-information #day {
+	color: #777
+}
+#description {
+	margin-top: 1rem;
+	text-align: left;
+	font-size: .9rem;
+	color: #555;
 }
 #app {
 	width: 100%;
 	height: 100vh
+}
+.animation {
+	transition: all .5s ease
+}
+.icon-cluster {
+	border-radius: 50%;
+	line-height: 30px;
+	text-align: center;
+	font-size: 1rem;
+}
+.icon-cluster:before {
+	content:"";
+	position:absolute;
+	top:50%;
+	left:50%;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	transform: translate(-50%,-50%);
+	z-index: -2
+}
+.icon-cluster:after {
+	content:"";
+	position:absolute;
+	top:50%;
+	left:50%;
+	border-radius:50%;
+	width:30px;
+	height:30px;
+	transform:translate(-50%,-50%);
+	z-index:-1
+}
+.sufficient,.emergency {
+	color: #fff
+}
+.warning,.sold-out {
+	color: #333
+}
+#information .sufficient,#app .sufficient:before,#app .sufficient:after {
+	background: rgba(16, 120, 121, .5);
+}
+#information .warning,#app .warning:before,#app .warning:after {
+	background: rgba(230, 127, 34, .5);
+}
+#information .emergency,#app .emergency:before,#app .emergency:after {
+	background: rgba(233, 30, 58, .5);
+}
+#information .sold-out,#app .sold-out:before,#app .sold-out:after {
+	background: rgba(153,153,153,.5);
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
 }
