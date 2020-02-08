@@ -1,0 +1,65 @@
+.pace {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(153, 153, 153, .9);
+	pointer-events: none;
+	user-select: none;
+	opacity: 1;
+	visibility: visible;
+	z-index: 2000;
+	transition: all 1s ease;
+}
+
+.pace-inactive {
+	opacity: 0;
+	visibility: hidden;
+}
+.pace .pace-progress {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-1rem,-50%)!important;
+}
+
+.pace .pace-progress:after {
+  content: attr(data-progress-text);
+  display: block;
+  font-weight: 100;
+  font-size: 5rem;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.pace-activity {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -1.5rem -6rem;
+	width: 3rem;
+	height: 3rem;
+	transform: translate(-50%,-100%);
+	background-color: #333;
+	animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes sk-rotateplane {
+  0% { 
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+  } 50% { 
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+  } 100% { 
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}

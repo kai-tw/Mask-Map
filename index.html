@@ -4,9 +4,12 @@
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1" name="viewport">
 		<title>口罩地圖</title>
-		<link rel="stylesheet" href="leaflet/leaflet.css">
-		<link rel="stylesheet" href="main.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+TC&display=swap">
+		<link rel="stylesheet" href="css/leaflet.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/pace.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+TC:400,900&display=swap">
+		<script async data-main="js/main" src="js/require.js"></script>
+		<script async src="https://kit.fontawesome.com/bec0918bee.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<div id="information">
@@ -14,13 +17,24 @@
 			<div id="purchase-information">
 				<span id="parity"></span><span id="day"></span>
 			</div>
-			<div class="sufficient">100 個以上</div>
-			<div class="warning">40 ~ 99 個</div>
-			<div class="emergency">1 ~ 39 個</div>
-			<div class="sold-out">無存貨</div>
-			<div id="description">圓圈中的數字代表該區域的店家數量</div>
+			<div class="legend">
+				<div class="sufficient">100 個以上</div>
+				<div class="warning">40 ~ 99 個</div>
+				<div class="emergency">1 ~ 39 個</div>
+				<div class="sold-out">無存貨</div>
+			</div>
+			<ul id="description">
+				<li>圓圈中的數字代表該區域的店家數量</li>
+				<li>部分藥局因採發放號碼牌方式，方便民眾購買口罩，系統目前無法顯示已發送號碼牌數量</li>
+				<li>口罩數量以藥局實際存量為主，線上查詢之數量僅供參考</li>
+			</ul>
+		</div>
+		<div id="control-panel">
+			<button id="menu"><span class="fas fa-bars"></span></button>
+			<button id="zoom-in"><span class="fas fa-plus"></span></button>
+			<button id="zoom-out"><span class="fas fa-minus"></span></button>
+			<button id="current-location"><span class="fas fa-location-arrow"></span></button>
 		</div>
 		<div id="app"></div>
-		<script async data-main="main" src="require.js"></script>
 	</body>
 </html>

@@ -1,0 +1,248 @@
+html {
+	font: 18px/2 "Noto Sans","Noto Sans TC", sans-serif;
+	color: #333
+}
+body {
+	position: relative;
+	margin: 0;
+	overflow: hidden
+}
+#information {
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	border-radius: 1rem;
+	padding: 1rem;
+	max-width: 200px;
+	max-height: 100%;
+	background: rgba(255,255,255,.8);
+	box-sizing: border-box;
+	text-align: center;
+	overflow: hidden;
+	z-index: 1000;
+	transition: all .2s ease;
+}
+#information.open {
+	transform: translate(0,0)
+}
+@media screen and (max-width: 768px) {
+	#information {
+		transform: translate(-13rem,0);
+	}
+}
+#logo {
+	margin: 0;
+	font-size: 1rem;
+}
+#purchase-information #parity {
+	margin-right: 1rem;
+	font-size: 2rem;
+	font-weight: bold
+}
+#purchase-information #day {
+	color: #777
+}
+.legend {
+	margin: 0;
+	border-radius: 1rem;
+	overflow: hidden
+}
+.legend .sufficient,#app .sufficient:before,#app .sufficient:after {
+	background: rgba(16, 120, 121, .5);
+}
+.legend .warning,#app .warning:before,#app .warning:after {
+	background: rgba(230, 127, 34, .5);
+}
+.legend .emergency,#app .emergency:before,#app .emergency:after {
+	background: rgba(233, 30, 58, .5);
+}
+.legend .sold-out,#app .sold-out:before,#app .sold-out:after {
+	background: rgba(153,153,153,.5);
+}
+.sufficient,.emergency {
+	color: #fff
+}
+.warning,.sold-out {
+	color: #333
+}
+#description {
+	margin: 1rem 0;
+	padding-left: 1rem;
+	text-align: left;
+	font-size: .9rem;
+	color: #555;
+}
+#control-panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1000
+}
+#control-panel button {
+	outline: none;
+	display: block;
+	margin: 1rem;
+	border: 1px solid #eee;
+	border-radius: .5rem;
+	width: 3rem;
+	height: 3rem;
+	line-height: 3rem;
+	background: rgba(255,255,255,.8);
+	font-size: 1rem;
+	text-align: center;
+	cursor: pointer;
+	transition: all .2s ease;
+}
+#control-panel button:hover {
+	background: #fff
+}
+#app {
+	width: 100%;
+	height: 100vh;
+	font: inherit;
+}
+#app .animation {
+	transition: all .5s ease
+}
+#app .icon-cluster {
+	border-radius: 50%;
+	line-height: 30px;
+	text-align: center;
+	font-size: 1rem;
+}
+#app .icon-cluster:before {
+	content:"";
+	position:absolute;
+	top:50%;
+	left:50%;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	transform: translate(-50%,-50%);
+	z-index: -2
+}
+#app .icon-cluster:after {
+	content:"";
+	position:absolute;
+	top:50%;
+	left:50%;
+	border-radius:50%;
+	width:30px;
+	height:30px;
+	transform:translate(-50%,-50%);
+	z-index:-1
+}
+#app .leaflet-popup-content p {
+	margin: 1rem 0;
+}
+#app .user-location {
+	font-weight: bold;
+	text-align: center
+}
+#app .loc-accuracy {
+	text-align: center
+}
+#app .store-information {
+	position: relative
+}
+#app .store-information:before {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 1.5rem;
+	width: 8rem;
+	height: 8rem;
+	background: url(../images/sale.svg) center/contain no-repeat;
+	opacity: .1
+}
+#app .store-information .store-status {
+	display: flex;
+	flex-direction: row
+}
+#app .store-information .store-status .container {
+	position: relative;
+	margin: .5rem;
+	padding: 0 1rem;
+	border-radius: 1rem;
+	width: 8rem;
+	line-height: 1.2;
+	overflow: hidden;
+}
+#app .store-information .store-status .container:before {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 6rem;
+	height: 6rem;
+	transform: translate(1.5rem,1rem);
+	opacity: .5
+}
+#app .store-information .store-status .sufficient {
+	background: rgb( 16,120,121)
+}
+#app .store-information .store-status .sufficient:before {
+	background: url(../images/tick.svg) center/contain no-repeat
+}
+#app .store-information .store-status .warning {
+	background: rgb(230,127, 34);
+	color: #fff
+}
+#app .store-information .store-status .warning:before {
+	background: url(../images/alert.svg) center/contain no-repeat
+}
+#app .store-information .store-status .emergency {
+	background: rgb(233, 30, 58)
+}
+#app .store-information .store-status .emergency:before {
+	background: url(../images/siren.svg) center/contain no-repeat
+}
+#app .store-information .store-status .sold-out {
+	background: rgb(153,153,153)
+}
+#app .store-information .store-status .sold-out:before {
+	background: url(../images/cross.svg) center/contain no-repeat
+}
+#app .store-information .store-status .number {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+#app .store-information > p {
+	margin: 1rem 1.5rem
+}
+#app .store-information > p a {
+	border-bottom: 1px solid;
+	color: inherit;
+	text-decoration: none;
+	transition: all .2s ease
+}
+#app .store-information > p a:hover {
+	border-color: transparent
+}
+#app .store-information .store-name {
+	margin: 1rem .5rem;
+	padding-left: .7rem;
+	border-left: .3rem solid rgb( 16,120,121);
+	font-size: 1.2rem;
+	font-weight: bold
+}
+#app .store-information .store-distance {
+	display: inline-block;
+	margin-left: 1rem;
+	padding: .2rem 1rem;
+	border-radius: .5rem;
+	line-height: 1.2rem;
+	font-size: .8rem;
+	font-weight: normal;
+	color: #555;
+	background: #eee;
+	vertical-align: text-top;
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
