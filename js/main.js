@@ -40,7 +40,7 @@ require(["pace.min","leaflet"],function(){
 		document.getElementById("zoom-in").addEventListener("click",function(){map.zoomIn()});
 		document.getElementById("zoom-out").addEventListener("click",function(){map.zoomOut()});
 		document.getElementById("current-location").addEventListener("click",function(){
-			map.setView(currentMar.getLatLng(),16);
+			map.flyTo(currentMar.getLatLng(),16);
 		});
 		document.getElementById("menu").addEventListener("click",function(){
 			document.getElementById("information").classList.toggle("open");
