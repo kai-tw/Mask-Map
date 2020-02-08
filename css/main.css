@@ -25,11 +25,6 @@ body {
 #information.open {
 	transform: translate(0,0)
 }
-@media screen and (max-width: 768px) {
-	#information {
-		transform: translate(-13rem,0);
-	}
-}
 #logo {
 	margin: 0;
 	font-size: 1rem;
@@ -245,4 +240,14 @@ body {
 	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
 	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
 	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+
+
+@media screen and (max-width: 768px) {
+	html {
+		font-size: 16px
+	}
+	#information {
+		transform: translate(-13rem,0);
+	}
 }
