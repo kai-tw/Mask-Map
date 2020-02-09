@@ -311,15 +311,19 @@ body {
 	}
 	#control-panel {
 		flex-direction: row;
-	}
-	#control-panel.expend {
-		transform: translate(0,-550%)
+		top: 0;
+		left: 0;
+		right: unset;
+		bottom: unset;
 	}
 	#control-panel #menu {
 		display: block
 	}
 	.legend {
 		flex-direction: row;
+	}
+	.legend div {
+		padding: .5rem 0;
 	}
 	#app .store-information .store-status {
 		flex-direction: column
