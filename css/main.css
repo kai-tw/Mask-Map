@@ -9,16 +9,17 @@ body {
 }
 #information {
 	position: fixed;
-	top: 1rem;
-	left: 1rem;
-	border-radius: 1rem;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	border-radius: 0 1rem 1rem 0;
 	padding: 1rem;
 	max-width: 200px;
 	max-height: 100%;
 	background: rgba(255,255,255,.8);
 	box-sizing: border-box;
 	text-align: center;
-	overflow: hidden;
+	overflow: hidden auto;
 	z-index: 1000;
 	transition: all .2s ease;
 }
@@ -69,8 +70,8 @@ body {
 }
 #control-panel {
 	position: absolute;
-	top: 0;
 	right: 0;
+	bottom: 0;
 	z-index: 1000
 }
 #control-panel button {
@@ -108,7 +109,7 @@ body {
 	font: inherit;
 }
 #app .animation {
-	transition: all .5s ease
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
 }
 #app .icon-cluster {
 	border-radius: 50%;
@@ -246,12 +247,10 @@ body {
 	background: #eee;
 	vertical-align: text-top;
 }
-
+.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
 .leaflet-cluster-spider-leg {
-	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
-	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
-	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
-	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
 	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
 }
 .pace {

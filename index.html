@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1" name="viewport">
 		<title>口罩地圖</title>
+		<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css'>
 		<link rel="stylesheet" href="css/leaflet.css">
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+TC:400,900&display=swap">
@@ -30,10 +31,10 @@
 		</div>
 		<div id="control-panel">
 			<button id="menu"><span class="fas fa-bars"></span></button>
+			<button id="mask-toggle"><span class="fas fa-child"></span></button>
+			<button id="current-location"><span class="fas fa-location-arrow"></span></button>
 			<button id="zoom-in"><span class="fas fa-plus"></span></button>
 			<button id="zoom-out"><span class="fas fa-minus"></span></button>
-			<button id="current-location"><span class="fas fa-location-arrow"></span></button>
-			<button id="mask-toggle"><span class="fas fa-child"></span></button>
 		</div>
 		<div id="app"></div>
 	</body>

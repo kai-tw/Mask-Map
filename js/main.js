@@ -2,19 +2,25 @@
 
 let t;
 
+require.config({
+	paths: {
+		"mapbox-gl" : "https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl"
+	}
+});
+
 require(["pace.min","leaflet"],function(){
-	require(["leaflet.markercluster"],function(){
-		let map = L.map("app", {attributionControl:false,zoomControl:false,preferCanvas:true}),
-			osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+	require(["leaflet.markercluster","leaflet-mapbox-gl"],function(){
+		let map = L.map("app", {attributionControl:false,zoomControl:false,minZoom:3,maxZoom:19}),
+			osmUrl="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 			osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 19}),
 			today = new Date(),
 			currentIcon = L.icon({iconUrl:"images/current.svg",className:"animation",iconSize:[24,24]}),
 			currentMar = L.marker([0,0], {icon: currentIcon}),
 			storeIcon = [
-				L.icon({iconUrl:"images/sold-out.svg",className:"animation",iconSize:[48,48],iconAnchor:[24,48],popupAnchor:[0,-48]}),
-				L.icon({iconUrl:"images/emergency.svg",className:"animation",iconSize:[48,48],iconAnchor:[24,48],popupAnchor:[0,-48]}),
-				L.icon({iconUrl:"images/warning.svg",className:"animation",iconSize:[48,48],iconAnchor:[24,48],popupAnchor:[0,-48]}),
-				L.icon({iconUrl:"images/sufficient.svg",className:"animation",iconSize:[48,48],iconAnchor:[24,48],popupAnchor:[0,-48]})
+				L.icon({iconUrl:"images/sold-out.svg",iconSize:[48,48],iconAnchor:[24,48],popupAnchor:[0,-48]}),
+				L.icon({iconUrl:"images/emergency.svg",iconSize:[48,48],iconAnchor:[24,48],popupAnchor:[0,-48]}),
+				L.icon({iconUrl:"images/warning.svg",iconSize:[48,48],iconAnchor:[24,48],popupAnchor:[0,-48]}),
+				L.icon({iconUrl:"images/sufficient.svg",iconSize:[48,48],iconAnchor:[24,48],popupAnchor:[0,-48]})
 			],
 			storeClass = ["sold-out","emergency","warning","sufficient"],
 			purchase = {day:["日","一","二","三","四","五","六"],parity:["不限","奇數","偶數","奇數","偶數","奇數","偶數"]},
@@ -29,15 +35,17 @@ require(["pace.min","leaflet"],function(){
 								order < 1 && list[i].options.icon.options.iconUrl === storeIcon[1].options.iconUrl ? 1 :
 								list[i].options.icon.options.iconUrl === storeIcon[0] ? 0 : order;
 					}
-					return L.divIcon({html:cluster.getChildCount(),className:"animation icon-cluster " + storeClass[order],iconSize:[72,30]});
+					return L.divIcon({html:cluster.getChildCount(),className:"icon-cluster " + storeClass[order],iconSize:[72,30]});
 				},
-				removeOutsideVisibleBounds: true
+				removeOutsideVisibleBounds: true,
+				animate: true
 			}),
 			childrenStat = false,
 			usrLocationStat = false;
 		
-		map.setView([23.97565,120.97388], 6);
 		map.addLayer(osm);
+		
+		map.setView([23.97565,120.97388], 6);
 		map.setMaxBounds([[90,-180], [-90,180]]);
 		document.getElementById("parity").innerText = purchase.parity[today.getDay()];
 		document.getElementById("day").innerText = "星期" + purchase.day[today.getDay()];
