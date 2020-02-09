@@ -395,7 +395,7 @@ a:hover {
 		top: 40%;
 		border-radius: 2rem 2rem 0 0;
 		width: 100%;
-		transform: translate(0,100%);
+		transform: translate(0,calc(100% - 8rem));
 	}
 	#control-panel {
 		flex-direction: row;
