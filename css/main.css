@@ -1,3 +1,11 @@
+@font-face{
+	font-family:'Font Awesome 5 Free';
+	font-style:normal;
+	font-weight:900;
+	font-display:swap;
+	src:url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot);
+	src:url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff2) format("woff2"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff) format("woff"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.ttf) format("truetype"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.svg#fontawesome) format("svg")
+}
 html {
 	font: 18px/2 "Noto Sans","Noto Sans TC", sans-serif;
 	color: #333
@@ -14,8 +22,8 @@ body {
 	bottom: 0;
 	border-radius: 0 1rem 1rem 0;
 	padding: 1rem;
-	max-width: 200px;
-	max-height: 100%;
+	width: 200px;
+	max-height: 100vh;
 	background: rgba(255,255,255,.8);
 	box-sizing: border-box;
 	text-align: center;
@@ -23,12 +31,12 @@ body {
 	z-index: 1000;
 	transition: all .2s ease;
 }
-#information.open {
-	transform: translate(0,0)
+#information.expend {
+	transform: translate(0,0);
 }
 #logo {
 	margin: 0;
-	font-size: 1rem;
+	font-size: 1.5rem;
 }
 #purchase-information #parity {
 	margin-right: 1rem;
@@ -39,9 +47,14 @@ body {
 	color: #777
 }
 .legend {
+	display: flex;
+	flex-direction: column;
 	margin: 0;
 	border-radius: 1rem;
 	overflow: hidden
+}
+.legend div {
+	flex: 1;
 }
 .legend .sufficient,#app .sufficient:before,#app .sufficient:after {
 	background: rgba(16, 120, 121, .5);
@@ -70,9 +83,12 @@ body {
 }
 #control-panel {
 	position: absolute;
+	display: flex;
+	flex-direction: column;
 	right: 0;
 	bottom: 0;
-	z-index: 1000
+	z-index: 1000;
+	transition: all .2s ease
 }
 #control-panel button {
 	outline: none;
@@ -275,18 +291,35 @@ body {
   width: 100%;
   height: 2px;
 }
-
-
+.fas {font-family: 'Font Awesome 5 Free';font-weight: 900}
+.fa-bars:before {content: "\f0c9"}
+.fa-child:before {content: "\f1ae"}
+.fa-location-arrow:before {content: "\f124"}
+.fa-plus:before {content: "\f067"}
+.fa-minus:before {content: "\f068"}
 
 @media screen and (max-width: 768px) {
 	html {
 		font-size: 16px
 	}
 	#information {
-		transform: translate(-13rem,0);
+		top: 40%;
+		padding: 1rem 3rem;
+		border-radius: 2rem 2rem 0 0;
+		width: 100%;
+		transform: translate(0,100%);
+	}
+	#control-panel {
+		flex-direction: row;
+	}
+	#control-panel.expend {
+		transform: translate(0,-550%)
 	}
 	#control-panel #menu {
 		display: block
+	}
+	.legend {
+		flex-direction: row;
 	}
 	#app .store-information .store-status {
 		flex-direction: column
