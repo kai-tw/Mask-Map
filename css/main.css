@@ -139,6 +139,13 @@ a:hover {
 	height: 100vh;
 	font: inherit;
 }
+#app a {
+	color: #333
+}
+#app .leaflet-popup-close-button {
+	padding: .5rem .5rem 0 0;
+	font-size: 1.2rem;
+}
 #app .animation {
 	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
 }
