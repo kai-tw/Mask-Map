@@ -317,7 +317,6 @@ a:hover {
 	}
 	#information {
 		top: 40%;
-		padding: 1rem 3rem;
 		border-radius: 2rem 2rem 0 0;
 		width: 100%;
 		transform: translate(0,100%);

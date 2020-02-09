@@ -2,14 +2,8 @@
 
 let t;
 
-require.config({
-	paths: {
-		"mapbox-gl" : "https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl"
-	}
-});
-
 require(["pace.min","leaflet"],function(){
-	require(["leaflet.markercluster","leaflet-mapbox-gl"],function(){
+	require(["leaflet.markercluster"],function(){
 		let map = L.map("app", {attributionControl:false,zoomControl:false,minZoom:3,maxZoom:19}),
 			osmUrl="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 			osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 19}),
@@ -114,7 +108,7 @@ require(["pace.min","leaflet"],function(){
 			if (navigator.geolocation) {
 				let pos = navigator.geolocation.watchPosition(function(geo){
 					currentMar.setLatLng([geo.coords.latitude,geo.coords.longitude]);
-					currentMar.bindPopup("<p class='user-location'>目前位置</p><p class='loc-accuracy'>GPS 精確度："+geo.coords.accuracy+" 公尺</p>");
+					currentMar.bindPopup("<p class='user-location'>目前位置</p><p class='loc-accuracy'>GPS 精確度："+Math.round(geo.coords.accuracy * 100) / 100+" 公尺</p>");
 					currentMar.addTo(map);
 					storeMarkers.eachLayer(function(layer){
 						layer._popup._content.getElementsByClassName("store-distance")[0].innerText = geoDistance([[geo.coords.latitude,geo.coords.longitude],[layer._popup._content.dataset.lat,layer._popup._content.dataset.lng]]);
