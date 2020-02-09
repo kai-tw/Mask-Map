@@ -1,5 +1,7 @@
 'use strict';
 
+let t;
+
 require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
 		let map = L.map("app", {attributionControl:false,zoomControl:false,preferCanvas:true}),
@@ -30,7 +32,9 @@ require(["pace.min","leaflet"],function(){
 					return L.divIcon({html:cluster.getChildCount(),className:"animation icon-cluster " + storeClass[order],iconSize:[72,30]});
 				},
 				removeOutsideVisibleBounds: true
-			});
+			}),
+			childrenStat = false,
+			usrLocationStat = false;
 		
 		map.setView([23.97565,120.97388], 6);
 		map.addLayer(osm);
@@ -40,10 +44,26 @@ require(["pace.min","leaflet"],function(){
 		document.getElementById("zoom-in").addEventListener("click",function(){map.zoomIn()});
 		document.getElementById("zoom-out").addEventListener("click",function(){map.zoomOut()});
 		document.getElementById("current-location").addEventListener("click",function(){
-			map.flyTo(currentMar.getLatLng(),16);
+			if (usrLocationStat)
+				map.flyTo(currentMar.getLatLng(),16);
+			else
+				alert("定位資料取得失敗，故不能進行目前位置顯示");
 		});
 		document.getElementById("menu").addEventListener("click",function(){
 			document.getElementById("information").classList.toggle("open");
+		});
+		document.getElementById("mask-toggle").addEventListener("click",function(){
+			this.classList.toggle("child");
+			childrenStat = (childrenStat) ? false : true;
+			if (childrenStat)
+				storeMarkers.eachLayer(function(layer){
+					layer.setIcon(storeIcon[markerOrder("child",layer._popup._content.getElementsByClassName("number")[1].innerText)]);
+				});
+			else
+				storeMarkers.eachLayer(function(layer){
+					layer.setIcon(storeIcon[markerOrder("adult",layer._popup._content.getElementsByClassName("number")[0].innerText)]);
+				});
+			storeMarkers.refreshClusters();
 		});
 		xhr.addEventListener("load", function(){
 			let data = JSON.parse(this.responseText);
@@ -56,6 +76,7 @@ require(["pace.min","leaflet"],function(){
 					storeStatus = L.DomUtil.create("div","store-status",popupContent);
 				popupContent.dataset.lat = storeLocation[0];
 				popupContent.dataset.lng = storeLocation[1];
+				popupContent.dataset.id = store.properties.id;
 				for (let i = 0; i < 2; i++) {
 					let	container = L.DomUtil.create("div","container",storeStatus),
 						label = L.DomUtil.create("p","label",container),
@@ -87,17 +108,43 @@ require(["pace.min","leaflet"],function(){
 					currentMar.setLatLng([geo.coords.latitude,geo.coords.longitude]);
 					currentMar.bindPopup("<p class='user-location'>目前位置</p><p class='loc-accuracy'>GPS 精確度："+geo.coords.accuracy+" 公尺</p>");
 					currentMar.addTo(map);
-					
 					storeMarkers.eachLayer(function(layer){
 						layer._popup._content.getElementsByClassName("store-distance")[0].innerText = geoDistance([[geo.coords.latitude,geo.coords.longitude],[layer._popup._content.dataset.lat,layer._popup._content.dataset.lng]]);
 					});
+					usrLocationStat = true;
 				},function(){},{enableHighAccuracy:true,timeout:5000});
 			}
 			map.addLayer(storeMarkers);
+			window.setInterval(function(){
+				let updator = new XMLHttpRequest,
+					index = {};
+				updator.addEventListener("load",function(){
+					let json = JSON.parse(this.responseText);
+					for (let i = 0; i < json.features.length; i++) {
+						index[json.features[i].properties.id] = i;
+					}
+					storeMarkers.eachLayer(function(layer){
+						let dom = layer._popup._content,
+							id = dom.dataset.id,
+							stat = json.features[index[id]],
+							con = dom.getElementsByClassName("container"),
+							num = dom.getElementsByClassName("number");
+						con[0].setAttribute("class","container " + storeClass[markerOrder("adult",stat.properties.mask_adult)]);
+						con[1].setAttribute("class","container " + storeClass[markerOrder("child",stat.properties.mask_child)]);
+						num[0].innerText = stat.properties.mask_adult;
+						num[1].innerText = stat.properties.mask_child;
+						if (childrenStat)
+							layer.setIcon(storeIcon[markerOrder("child",stat.properties.mask_child)]);
+						else
+							layer.setIcon(storeIcon[markerOrder("adult",stat.properties.mask_adult)]);
+					});
+				});
+				updator.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
+				updator.send();
+			},30000);
 		});
-		xhr.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json");
+		xhr.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
 		xhr.send();
-		Pace.start();
 	});
 });
 function markerOrder(str,num) {

@@ -91,6 +91,17 @@ body {
 #control-panel button:hover {
 	background: #fff
 }
+#control-panel #menu {
+	display: none;
+}
+#control-panel #mask-toggle.child {
+	border-color: rgb(16, 120, 121);
+	background: rgba(16, 120, 121, .8);
+	color: #fff;
+}
+#control-panel #mask-toggle.child:hover {
+	background: rgb(16, 120, 121);
+}
 #app {
 	width: 100%;
 	height: 100vh;
@@ -244,70 +255,29 @@ body {
 	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
 }
 .pace {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(153, 153, 153, .9);
-	pointer-events: none;
-	user-select: none;
-	opacity: 1;
-	visibility: visible;
-	z-index: 2000;
-	transition: all 1s ease;
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 .pace-inactive {
-	opacity: 0;
-	visibility: hidden;
+  display: none;
 }
+
 .pace .pace-progress {
-	position: absolute;
-	top: 60%;
-	left: 50%;
-	transform: translate(-50%,-50%)!important;
+  background: #ff7006;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
 }
 
-.pace .pace-progress:after {
-  content: attr(data-progress-text);
-  display: block;
-  font-weight: 100;
-  font-size: 5rem;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.2);
-}
 
-.pace-activity {
-	position: absolute;
-	top: 45%;
-	left: 50%;
-	margin: -2.5rem;
-	width: 5rem;
-	height: 5rem;
-	transform: translate(-50%,-50%);
-	background-color: #333;
-	animation: sk-rotateplane 1.2s infinite ease-in-out;
-}
-
-@-webkit-keyframes sk-rotateplane {
-  0% { -webkit-transform: perspective(120px) }
-  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
-  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
-}
-
-@keyframes sk-rotateplane {
-  0% { 
-    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
-  } 50% { 
-    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
-  } 100% { 
-    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-  }
-}
 
 @media screen and (max-width: 768px) {
 	html {
@@ -315,7 +285,10 @@ body {
 	}
 	#information {
 		transform: translate(-13rem,0);
-	}	
+	}
+	#control-panel #menu {
+		display: block
+	}
 	#app .store-information .store-status {
 		flex-direction: column
 	}
