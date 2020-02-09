@@ -102,11 +102,12 @@ a:hover {
 	display: flex;
 	flex-direction: column;
 	margin: .5rem;
-	z-index: 1000;
+	z-index: 1002;
 	transition: all .2s ease
 }
-#control-panel button {
+#control-panel button,#guide button {
 	outline: none;
+	position: relative;
 	display: block;
 	margin: .5rem;
 	border: 1px solid #eee;
@@ -115,6 +116,7 @@ a:hover {
 	height: 3rem;
 	line-height: 3rem;
 	background: rgba(255,255,255,.8);
+	font-family:inherit;
 	font-size: 1rem;
 	text-align: center;
 	cursor: pointer;
@@ -122,6 +124,46 @@ a:hover {
 }
 #control-panel button:hover {
 	background: #fff
+}
+#control-panel button:before {
+	content: attr(data-tooltip);
+	position: absolute;
+	top: 50%;
+	right: 100%;
+	padding: 0 1rem;
+	border-radius: .2rem;
+	background: #3E474F;
+	color: #EDEFF0;
+	white-space:pre;
+	transform: translate(20%,-50%) scale(.7);
+	transition: all .3s cubic-bezier(0.42, 0, 0.48, 0.9);
+	opacity: 0;
+	visibility: hidden;
+}
+#control-panel button:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 100%;
+	width: 0;
+	height: 0;
+	border-left: .8rem solid #3E474F;
+	border-top: .8rem solid transparent;
+	border-bottom: .8rem solid transparent;
+	transform: translate(0,-50%) scale(.7);
+	transition: all .3s cubic-bezier(1, 0.03, 0, 0.92);
+	opacity: 0;
+	visibility: hidden;
+}
+#control-panel button:hover:before {
+	transform: translate(-.7rem,-50%);
+	opacity: 1;
+	visibility: visible;
+}
+#control-panel button:hover:after {
+	transform: translate(0,-50%);
+	opacity: 1;
+	visibility: visible;
 }
 #control-panel #menu {
 	display: none;
@@ -133,6 +175,39 @@ a:hover {
 }
 #control-panel #mask-toggle.child:hover {
 	background: rgb(16, 120, 121);
+}
+#guide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 4rem;
+	bottom: 0;
+	margin: 1rem;
+	padding: 1rem 2rem;
+	border-radius: 2rem;
+	background: rgba(255,255,255,.9);
+	transition: all .3s ease-in-out;
+	z-index: 1001;
+	opacity: 0;
+	visibility: hidden;
+	overflow: hidden auto;
+}
+#guide.open {
+	opacity: 1;
+	visibility: visible;
+}
+#guide::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+#guide::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 20px;
+}
+
+#guide::-webkit-scrollbar-track {
+  background: #ddd;
+  border-radius: 20px;
 }
 #app {
 	width: 100%;
@@ -310,6 +385,7 @@ a:hover {
 .fa-location-arrow:before {content: "\f124"}
 .fa-plus:before {content: "\f067"}
 .fa-minus:before {content: "\f068"}
+.fa-question:before {content: "\f128"}
 
 @media screen and (max-width: 768px) {
 	html {
@@ -330,6 +406,13 @@ a:hover {
 	}
 	#control-panel #menu {
 		display: block
+	}
+	#control-panel button:before,#control-panel button:after {
+		display: none;
+	}
+	#guide {
+		top: 4rem;
+		right: 0;
 	}
 	.legend {
 		flex-direction: row;

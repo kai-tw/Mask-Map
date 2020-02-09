@@ -36,6 +36,15 @@
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+TC:400,900&display=swap">
 		<script async data-main="js/main" src="js/require.js"></script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-63074009-3"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-63074009-3');
+		</script>
 	</head>
 	<body>
 		<div id="information">
@@ -57,11 +66,34 @@
 			<div class="copyright">Copyright 2020 by <a href="https://www.facebook.com/kai73002981">Kai Wu</a></div>
 		</div>
 		<div id="control-panel">
-			<button id="menu"><span class="fas fa-bars"></span></button>
-			<button id="mask-toggle"><span class="fas fa-child"></span></button>
-			<button id="current-location"><span class="fas fa-location-arrow"></span></button>
-			<button id="zoom-in"><span class="fas fa-plus"></span></button>
-			<button id="zoom-out"><span class="fas fa-minus"></span></button>
+			<button id="menu" data-tooltip="側欄開關"><span class="fas fa-bars"></span></button>
+			<button id="mask-toggle" data-tooltip="切換成人 / 兒童口罩"><span class="fas fa-child"></span></button>
+			<button id="current-location" data-tooltip="移動至目前位置"><span class="fas fa-location-arrow"></span></button>
+			<button id="zoom-in" data-tooltip="放大"><span class="fas fa-plus"></span></button>
+			<button id="zoom-out" data-tooltip="縮小"><span class="fas fa-minus"></span></button>
+			<button id="help" data-tooltip="使用手冊"><span class="fas fa-question"></span></button>
+		</div>
+		<div id="guide">
+			<h2>口罩地圖使用說明手冊</h2>
+			<p>首先，非常感謝您使用本口罩地圖，接下來為您說明介面中各按鈕的使用方法。</p>
+			<h3>切換成人 / 兒童口罩</h3>
+			<button><span class="fas fa-child"></span></button>
+			<p>地圖中每個標記點會顯示該藥局的庫存狀況，預設是顯示成人口罩的庫存狀況，上方的這個按鈕按下後切換成顯示兒童口罩的庫存狀況並且該按鈕會變成綠色底。讓您能快速辨別現在顯示的是成人口罩的庫存狀況，還是兒童口罩的庫存狀況。</p>
+			<h3>移動至目前位置</h3>
+			<button><span class="fas fa-location-arrow"></span></button>
+			<p>若您因為尋找藥局時找不到目前位置，那麼這個按鈕可以幫助您馬上回到目前位置，當然您必須先授權本地圖取得您的目前位置才行。</p>
+			<h3>放大</h3>
+			<button><span class="fas fa-plus"></span></button>
+			<p>這個按鈕是用來將地圖放大的。</p>
+			<h3>縮小</h3>
+			<button><span class="fas fa-minus"></span></button>
+			<p>這個按鈕是用來將地圖縮小的。</p>
+			<h3>使用手冊</h3>
+			<button><span class="fas fa-question"></span></button>
+			<p>這個按鈕是開啟本手冊的按鈕，再按一次可以將本手冊關閉。</p>
+			<h3>側欄開關</h3>
+			<button><span class="fas fa-bars"></span></button>
+			<p>使用手機瀏覽本地圖時才會出現的按鈕，用來開關側欄的按鈕。側欄寫有今日可購買的身分證字號為奇數還是偶數，也寫有地圖上各個標記點的庫存狀況顏色表，以及注意事項。</p>
 		</div>
 		<div id="app"></div>
 	</body>

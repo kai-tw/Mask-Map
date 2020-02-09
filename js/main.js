@@ -67,6 +67,9 @@ require(["pace.min","leaflet"],function(){
 				});
 			storeMarkers.refreshClusters();
 		});
+		document.getElementById("help").addEventListener("click",function(){
+			document.getElementById("guide").classList.toggle("open");
+		});
 		xhr.addEventListener("load", function(){
 			let data = JSON.parse(this.responseText);
 			data.features.forEach(function(store){
@@ -143,6 +146,8 @@ require(["pace.min","leaflet"],function(){
 				});
 				updator.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
 				updator.send();
+				document.getElementById("parity").innerText = purchase.parity[today.getDay()];
+				document.getElementById("day").innerText = "星期" + purchase.day[today.getDay()];
 			},30000);
 		});
 		xhr.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
