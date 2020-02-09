@@ -64,6 +64,7 @@ a:hover {
 }
 .legend div {
 	flex: 1;
+	padding: .3rem;
 }
 .legend .sufficient,#app .sufficient:before,#app .sufficient:after {
 	background: rgba(16, 120, 121, .5);
