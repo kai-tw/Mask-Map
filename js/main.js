@@ -5,7 +5,7 @@ let t;
 require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
 		let map = L.map("app", {attributionControl:false,zoomControl:false,minZoom:3,maxZoom:19}),
-			osmUrl="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+			osmUrl="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
 			osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 19}),
 			today = new Date(),
 			currentIcon = L.icon({iconUrl:"images/current.svg",className:"animation",iconSize:[24,24]}),
@@ -71,9 +71,15 @@ require(["pace.min","leaflet"],function(){
 			document.getElementById("guide").classList.toggle("open");
 		});
 		xhr.addEventListener("load", function(){
-			let data = JSON.parse(this.responseText);
+			let data = JSON.parse(this.responseText),index = {};
+			for (let i = 0; i < data.features.length; i++) {
+				index[data.features[i].properties.id] = i;
+			}
+			t = index;
+			data.features[index["5931033130"]].geometry.coordinates = [121.517612,25.006090];
+			data.features[index["5931033176"]].geometry.coordinates = [121.518552,25.007578];
 			data.features.forEach(function(store){
-				let storeLocation = store.properties.id === "5931033130" ? [25.006090,121.517612] : [store.geometry.coordinates[1],store.geometry.coordinates[0]];
+				let storeLocation = [store.geometry.coordinates[1],store.geometry.coordinates[0]];
 				store.properties.phone = store.properties.phone.replace(/ /g,"");
 				let marker = L.marker(storeLocation,{icon:storeIcon[markerOrder("adult",store.properties.mask_adult)]}),
 					popupConfig = {maxWidth: "auto"},
@@ -123,8 +129,8 @@ require(["pace.min","leaflet"],function(){
 			}
 			map.addLayer(storeMarkers);
 			window.setInterval(function(){
-				let updator = new XMLHttpRequest,
-					index = {};
+				let updator = new XMLHttpRequest;
+				index = {};
 				updator.addEventListener("load",function(){
 					let json = JSON.parse(this.responseText);
 					for (let i = 0; i < json.features.length; i++) {
