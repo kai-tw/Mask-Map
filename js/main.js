@@ -29,7 +29,7 @@ require(["pace.min","leaflet"],function(){
 								order < 1 && list[i].options.icon.options.iconUrl === storeIcon[1].options.iconUrl ? 1 :
 								list[i].options.icon.options.iconUrl === storeIcon[0] ? 0 : order;
 					}
-					return L.divIcon({html:cluster.getChildCount(),className:"icon-cluster " + storeClass[order],iconSize:[72,30]});
+					return L.divIcon({className:"icon-cluster " + storeClass[order],iconSize:[72,30]});
 				},
 				removeOutsideVisibleBounds: true,
 				animate: true
