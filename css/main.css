@@ -163,7 +163,7 @@ a:hover {
 	display: flex;
 	flex-direction: column;
 	margin: .5rem;
-	z-index: 1002;
+	z-index: 1001;
 	transition: all .2s ease
 }
 #control-panel button,#guide button {
@@ -259,7 +259,7 @@ a:hover {
 	border-radius: 2rem;
 	background: rgba(255,255,255,.9);
 	transition: all .3s ease-in-out;
-	z-index: 1001;
+	z-index: 1002;
 	opacity: 0;
 	visibility: hidden;
 	overflow: hidden auto;
