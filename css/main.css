@@ -40,8 +40,56 @@ a:hover {
 	z-index: 1000;
 	transition: all .2s ease;
 }
-#information.expend {
-	transform: translate(0,0);
+#information.close {
+	transform: translate(-100%,0);
+}
+#information .icon-information {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: no-wrap;
+	margin: 1rem 0;
+}
+#information .icon-information .item {
+	height: 50px;
+	line-height: 50px;
+}
+#information .icon-information .item img {
+	margin-right: 1rem;
+	height: 50px;
+	vertical-align: middle;
+}
+#information .icon-information .item:not(:first-child) {
+	margin-left: 1rem;
+}
+#information .icon-information .area {
+	display: inline-block;
+	position: relative;
+	margin-right: 1rem;
+	width: 50px;
+	height: 50px;
+	vertical-align: middle;
+}
+#information .icon-information .area:before,#information .icon-information .area:after {
+	content:"";
+	position: absolute;
+	top: 50%;
+	left: 50;
+	border-radius: 50%;
+	transform: translate(-50%,-50%);
+	background: rgba(16, 120, 121, .75);
+}
+#information .icon-information .area:before {
+	width: 50px;
+	height: 50px;
+	z-index: -2;
+}
+#information .icon-information .area:after {
+	width: 30px;
+	height: 30px;
+	z-index: -1;
+}
+#information .icon-information span {
+	vertical-align: middle;
 }
 #logo {
 	margin: 0;
@@ -67,13 +115,13 @@ a:hover {
 	padding: .3rem;
 }
 .legend .sufficient,#app .sufficient:before,#app .sufficient:after {
-	background: rgba(16, 120, 121, .5);
+	background: rgba(16, 120, 121, .75);
 }
 .legend .warning,#app .warning:before,#app .warning:after {
-	background: rgba(230, 127, 34, .5);
+	background: rgba(230, 127, 34, .65);
 }
 .legend .emergency,#app .emergency:before,#app .emergency:after {
-	background: rgba(233, 30, 58, .5);
+	background: rgba(233, 30, 58, .3);
 }
 .legend .sold-out,#app .sold-out:before,#app .sold-out:after {
 	background: rgba(153,153,153,.5);
@@ -82,10 +130,10 @@ a:hover {
 	font-size: .9rem;
 	color: #555
 }
-.sufficient,.emergency {
+.sufficient {
 	color: #fff
 }
-.warning,.sold-out {
+.warning,.sold-out,.emergency{
 	color: #333
 }
 #description {
@@ -96,7 +144,7 @@ a:hover {
 	color: #555;
 }
 #control-panel {
-	position: absolute;
+	position: fixed;
 	right: 0;
 	bottom: 0;
 	display: flex;
@@ -110,6 +158,7 @@ a:hover {
 	position: relative;
 	display: block;
 	margin: .5rem;
+	padding: 0;
 	border: 1px solid #eee;
 	border-radius: .5rem;
 	width: 3rem;
@@ -166,6 +215,16 @@ a:hover {
 	visibility: visible;
 }
 #control-panel #menu {
+	position: fixed;
+	top: 1rem;
+	left: 300px;
+	transform: rotate(-90deg)
+}
+#control-panel #menu.close {
+	transform: rotate(90deg);
+	left: 1rem;
+}
+#control-panel #menu:before,#control-panel #menu:after {
 	display: none;
 }
 #control-panel #mask-toggle.child {
@@ -177,7 +236,7 @@ a:hover {
 	background: rgb(16, 120, 121);
 }
 #guide {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 4rem;
@@ -230,26 +289,22 @@ a:hover {
 	text-align: center;
 	font-size: 1rem;
 }
-#app .icon-cluster:before {
+#app .icon-cluster:before,#app .icon-cluster:after {
 	content:"";
 	position:absolute;
 	top:50%;
 	left:50%;
 	border-radius: 50%;
+	transform: translate(-50%,-50%);
+}
+#app .icon-cluster:before {
 	width: 50px;
 	height: 50px;
-	transform: translate(-50%,-50%);
 	z-index: -2
 }
 #app .icon-cluster:after {
-	content:"";
-	position:absolute;
-	top:50%;
-	left:50%;
-	border-radius:50%;
 	width:30px;
 	height:30px;
-	transform:translate(-50%,-50%);
 	z-index:-1
 }
 #app .leaflet-popup-content p {
@@ -380,7 +435,7 @@ a:hover {
   height: 2px;
 }
 .fas {font-family: 'Font Awesome 5 Free';font-weight: 900}
-.fa-bars:before {content: "\f0c9"}
+.fa-chevron-up:before {content: "\f077"}
 .fa-child:before {content: "\f1ae"}
 .fa-location-arrow:before {content: "\f124"}
 .fa-plus:before {content: "\f067"}
@@ -398,6 +453,8 @@ a:hover {
 		top: 40%;
 		border-radius: 2rem 2rem 0 0;
 		width: 100%;
+	}
+	#information.close {
 		transform: translate(0,calc(100% - 8rem));
 	}
 	#control-panel {
@@ -407,11 +464,20 @@ a:hover {
 		right: unset;
 		bottom: unset;
 	}
-	#control-panel #menu {
-		display: block
-	}
 	#control-panel button:before,#control-panel button:after {
 		display: none;
+	}
+	#control-panel #menu {
+		top: calc(40% - 4.5rem);
+		left: unset;
+		right: 1rem;
+		transform: rotate(180deg);
+	}
+	#control-panel #menu.close {
+		top: calc(100% - 12.5rem);
+		left: unset;
+		right: 1rem;
+		transform: rotate(0);
 	}
 	#guide {
 		top: 4rem;

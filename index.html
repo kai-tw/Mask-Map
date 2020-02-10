@@ -58,6 +58,14 @@
 				<div class="emergency">20%以下</div>
 				<div class="sold-out">無存貨</div>
 			</div>
+			<div class="icon-information">
+				<div class="item">
+					<div class="area"></div><span>該附近有 2 個以上的藥局</span>
+				</div>
+				<div class="item">
+					<img src="images/sufficient.svg" alt="藥局圖標"><span>藥局</span></span>
+				</div>
+			</div>
 			<ul id="description">
 				<li>部分藥局因採發放號碼牌方式，方便民眾購買口罩，系統目前無法顯示已發送號碼牌數量</li>
 				<li>口罩數量以藥局實際存量為主，線上查詢之數量僅供參考</li>
@@ -65,7 +73,7 @@
 			<div class="copyright">Copyright 2020 by <a href="https://www.facebook.com/kai73002981">Kai Wu</a></div>
 		</div>
 		<div id="control-panel">
-			<button id="menu" data-tooltip="側欄開關"><span class="fas fa-bars"></span></button>
+			<button id="menu"><span class="fas fa-chevron-up"></span></button>
 			<button id="mask-toggle" data-tooltip="切換成人 / 兒童口罩"><span class="fas fa-child"></span></button>
 			<button id="current-location" data-tooltip="移動至目前位置"><span class="fas fa-location-arrow"></span></button>
 			<button id="zoom-in" data-tooltip="放大"><span class="fas fa-plus"></span></button>
@@ -90,9 +98,6 @@
 			<h3>使用手冊</h3>
 			<button><span class="fas fa-question"></span></button>
 			<p>這個按鈕是開啟本手冊的按鈕，再按一次可以將本手冊關閉。</p>
-			<h3>側欄開關</h3>
-			<button><span class="fas fa-bars"></span></button>
-			<p>使用手機瀏覽本地圖時才會出現的按鈕，用來開關側欄的按鈕。側欄寫有今日可購買的身分證字號為奇數還是偶數，也寫有地圖上各個標記點的庫存狀況顏色表，以及注意事項。</p>
 		</div>
 		<div id="app"></div>
 	</body>

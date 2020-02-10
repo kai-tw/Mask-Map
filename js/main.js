@@ -52,7 +52,8 @@ require(["pace.min","leaflet"],function(){
 				alert("定位資料取得失敗，故不能進行目前位置顯示");
 		});
 		document.getElementById("menu").addEventListener("click",function(){
-			document.getElementById("information").classList.toggle("expend");
+			document.getElementById("information").classList.toggle("close");
+			this.classList.toggle("close");
 		});
 		document.getElementById("mask-toggle").addEventListener("click",function(){
 			this.classList.toggle("child");
