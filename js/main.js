@@ -101,10 +101,12 @@ require(["pace.min","leaflet"],function(){
 				}
 				let storeName = L.DomUtil.create("p","store-name",popupContent),
 					storeAddr = L.DomUtil.create("p","store-address",popupContent),
-					storePhon = L.DomUtil.create("p","store-phone",popupContent);
+					storePhon = L.DomUtil.create("p","store-phone",popupContent),
+					storeUpda = L.DomUtil.create("p","store-updated",popupContent);
 					storeName.innerHTML = store.properties.name + "<span class='store-distance'></span>";
-					storeAddr.innerHTML = "<a href='https://www.google.com/maps?q=" + store.properties.name + "+" + store.properties.address + "' target='_blank'>" + store.properties.address + "</a>";
-					storePhon.innerHTML = "<a href='tel:" + store.properties.phone + "'>" + store.properties.phone + "</a>";
+					storeAddr.innerHTML = "<span class='fas fa-map-marked-alt'></span><a href='https://www.google.com/maps?q=" + store.properties.name + "+" + store.properties.address + "' target='_blank'>" + store.properties.address + "</a>";
+					storePhon.innerHTML = "<span class='fas fa-phone'></span><a href='tel:" + store.properties.phone + "'>" + store.properties.phone + "</a>";
+					storeUpda.innerHTML = "<span class='fas fa-sync-alt'></span>" + store.properties.updated;
 				marker.bindPopup(popupContent,popupConfig);
 				storeMarkers.addLayer(marker);
 			});
@@ -133,11 +135,13 @@ require(["pace.min","leaflet"],function(){
 							id = dom.dataset.id,
 							stat = json.features[index[id]],
 							con = dom.getElementsByClassName("container"),
-							num = dom.getElementsByClassName("number");
+							num = dom.getElementsByClassName("number"),
+							upd = dom.getElementsByClassName("store-updated")[0];
 						con[0].setAttribute("class","container " + storeClass[markerOrder("adult",stat.properties.mask_adult)]);
 						con[1].setAttribute("class","container " + storeClass[markerOrder("child",stat.properties.mask_child)]);
 						num[0].innerText = stat.properties.mask_adult;
 						num[1].innerText = stat.properties.mask_child;
+						upd.innerHTML = "<span class='fas fa-sync-alt'></span>" + stat.properties.updated;
 						if (childrenStat)
 							layer.setIcon(storeIcon[markerOrder("child",stat.properties.mask_child)]);
 						else

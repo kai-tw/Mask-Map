@@ -329,8 +329,8 @@ a:hover {
 	font-size: 1.5rem;
 	font-weight: bold;
 }
-#app .store-information > p {
-	margin: 1rem 1.5rem
+#app .store-information > p span {
+	margin-right: .5rem;
 }
 #app .store-information .store-name {
 	margin: 1rem .5rem;
@@ -341,7 +341,7 @@ a:hover {
 }
 #app .store-information .store-distance {
 	display: inline-block;
-	margin-left: 1rem;
+	margin: 0 0 0 1rem;
 	padding: .2rem 1rem;
 	border-radius: .5rem;
 	line-height: 1.2rem;
@@ -386,6 +386,9 @@ a:hover {
 .fa-plus:before {content: "\f067"}
 .fa-minus:before {content: "\f068"}
 .fa-question:before {content: "\f128"}
+.fa-map-marked-alt:before {content: "\f5a0"}
+.fa-phone:before {content: "\f095"}
+.fa-sync-alt:before {content: "\f2f1"}
 
 @media screen and (max-width: 768px) {
 	html {
@@ -420,10 +423,11 @@ a:hover {
 	.legend div {
 		padding: .5rem 0;
 	}
-	#app .store-information .store-status {
-		flex-direction: column
+	#app .store-information .store-status .container {
+		width: 6rem;
+		line-height: 1;
 	}
-	#app .store-information .store-distance {
-		margin: 1rem 0 0;
+	#app .store-information > p {
+		margin: .5rem 0;
 	}
 }
