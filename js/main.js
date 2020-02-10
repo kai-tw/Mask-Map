@@ -154,6 +154,7 @@ require(["pace.min","leaflet"],function(){
 						else
 							layer.setIcon(storeIcon[markerOrder("adult",stat.properties.mask_adult)]);
 					});
+					storeMarkers.refreshClusters();
 				});
 				updator.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
 				updator.send();
