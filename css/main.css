@@ -6,6 +6,19 @@
 	src:url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot);
 	src:url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff2) format("woff2"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff) format("woff"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.ttf) format("truetype"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.svg#fontawesome) format("svg")
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ddd;
+  border-radius: 20px;
+}
 html {
 	font: 18px/2 "Noto Sans","Noto Sans TC", sans-serif;
 	color: #333
@@ -253,19 +266,6 @@ a:hover {
 #guide.open {
 	opacity: 1;
 	visibility: visible;
-}
-#guide::-webkit-scrollbar {
-  width: 10px;
-}
- 
-#guide::-webkit-scrollbar-thumb {
-  background: #666;
-  border-radius: 20px;
-}
-
-#guide::-webkit-scrollbar-track {
-  background: #ddd;
-  border-radius: 20px;
 }
 #app {
 	width: 100%;
