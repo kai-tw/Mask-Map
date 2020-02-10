@@ -46,20 +46,19 @@ a:hover {
 #information .icon-information {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: no-wrap;
+	flex-wrap: wrap;
 	margin: 1rem 0;
 }
 #information .icon-information .item {
+	margin: 1rem 0;
 	height: 50px;
 	line-height: 50px;
+	white-space:nowrap;
 }
 #information .icon-information .item img {
 	margin-right: 1rem;
 	height: 50px;
 	vertical-align: middle;
-}
-#information .icon-information .item:not(:first-child) {
-	margin-left: 1rem;
 }
 #information .icon-information .area {
 	display: inline-block;
