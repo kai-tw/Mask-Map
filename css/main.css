@@ -134,6 +134,7 @@ a:hover {
 }
 .legend .emergency,#app .emergency:before,#app .emergency:after {
 	background: rgba(233, 30, 58, .3);
+	color: #333;
 }
 .legend .sold-out,#app .sold-out:before,#app .sold-out:after {
 	background: rgba(153,153,153,.5);
@@ -142,10 +143,10 @@ a:hover {
 	font-size: .9rem;
 	color: #555
 }
-.sufficient {
+.sufficient,.emergency {
 	color: #fff
 }
-.warning,.sold-out,.emergency{
+.warning,.sold-out{
 	color: #333
 }
 #description {
