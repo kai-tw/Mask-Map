@@ -77,6 +77,10 @@ require(["pace.min","leaflet"],function(){
 			}
 			data.features[index["5931033130"]].geometry.coordinates = [121.517612,25.006090];
 			data.features[index["5931033176"]].geometry.coordinates = [121.518552,25.007578];
+			data.features[index["5931101455"]].geometry.coordinates = [121.461145,25.136232];
+			data.features[index["5931100092"]].geometry.coordinates = [121.461358,25.136273];
+			data.features.splice(index["5931033701"],1);
+			delete index["5931033701"];
 			data.features.forEach(function(store){
 				let storeLocation = [store.geometry.coordinates[1],store.geometry.coordinates[0]];
 				let marker = L.marker(storeLocation,{icon:storeIcon[markerOrder("adult",store.properties.mask_adult)]}),
@@ -123,7 +127,11 @@ require(["pace.min","leaflet"],function(){
 						layer._popup._content.getElementsByClassName("store-distance")[0].innerText = geoDistance([[geo.coords.latitude,geo.coords.longitude],[layer._popup._content.dataset.lat,layer._popup._content.dataset.lng]]);
 					});
 					usrLocationStat = true;
-				},function(){},{enableHighAccuracy:true,timeout:5000});
+				},function(){
+					storeMarkers.eachLayer(function(layer){
+						layer._popup._content.getElementsByClassName("store-distance")[0].innerText = "無定位無距離";
+					});
+				},{enableHighAccuracy:true,timeout:5000});
 			}
 			map.addLayer(storeMarkers);
 			window.setInterval(function(){
