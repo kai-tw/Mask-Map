@@ -79,8 +79,6 @@ require(["pace.min","leaflet"],function(){
 			data.features[index["5931033176"]].geometry.coordinates = [121.518552,25.007578];
 			data.features[index["5931101455"]].geometry.coordinates = [121.461145,25.136232];
 			data.features[index["5931100092"]].geometry.coordinates = [121.461358,25.136273];
-			data.features.splice(index["5931033701"],1);
-			delete index["5931033701"];
 			data.features.forEach(function(store){
 				let storeLocation = [store.geometry.coordinates[1],store.geometry.coordinates[0]];
 				let marker = L.marker(storeLocation,{icon:storeIcon[markerOrder("adult",store.properties.mask_adult)]}),
