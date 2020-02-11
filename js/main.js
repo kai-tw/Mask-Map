@@ -129,7 +129,7 @@ require(["pace.min","leaflet"],function(){
 					storeMarkers.eachLayer(function(layer){
 						layer._popup._content.getElementsByClassName("store-distance")[0].innerText = "無定位無距離";
 					});
-				},{enableHighAccuracy:true,timeout:5000});
+				},{enableHighAccuracy:true});
 			}
 			map.addLayer(storeMarkers);
 			window.setInterval(function(){
