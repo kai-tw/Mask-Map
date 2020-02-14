@@ -1,0 +1,14 @@
+#information,#control-panel {
+	display: none;
+}
+.noscript {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	overflow: hidden auto;
+}
+.noscript h1 {
+}
