@@ -147,12 +147,12 @@ require(["pace.min","leaflet"],function(){
 							stat = json.features[index[id]],
 							con = dom.getElementsByClassName("container"),
 							num = dom.getElementsByClassName("number"),
-							upd = dom.getElementsByClassName("store-updated")[0];
+							upd = dom.getElementsByClassName("store-updated")[0].children[1];
 						con[0].setAttribute("class","container " + storeClass[markerOrder("adult",stat.properties.mask_adult)]);
 						con[1].setAttribute("class","container " + storeClass[markerOrder("child",stat.properties.mask_child)]);
 						num[0].innerText = stat.properties.mask_adult;
 						num[1].innerText = stat.properties.mask_child;
-						upd.innerHTML = "<span class='fas fa-sync-alt'></span>" + stat.properties.updated;
+						upd.innerHTML = stat.properties.updated;
 						if (childrenStat)
 							layer.setIcon(storeIcon[markerOrder("child",stat.properties.mask_child)]);
 						else
