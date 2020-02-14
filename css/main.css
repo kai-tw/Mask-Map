@@ -44,7 +44,7 @@ a:hover {
 	bottom: 0;
 	border-radius: 0 1rem 1rem 0;
 	padding: 1rem;
-	width: 300px;
+	width: 17rem;
 	max-height: 100vh;
 	background: rgba(255,255,255,.8);
 	box-sizing: border-box;
@@ -52,6 +52,7 @@ a:hover {
 	overflow: hidden auto;
 	z-index: 1000;
 	transition: all .2s ease;
+	box-shadow: 0 0 1rem 1rem rgba(0,0,0,.1);
 }
 #information.close {
 	transform: translate(-100%,0);
@@ -228,7 +229,7 @@ a:hover {
 #control-panel #menu {
 	position: fixed;
 	top: 1rem;
-	left: 300px;
+	left: 17rem;
 	transform: rotate(-90deg)
 }
 #control-panel #menu.close {
@@ -249,7 +250,7 @@ a:hover {
 #guide {
 	position: fixed;
 	top: 0;
-	left: 0;
+	left: 20rem;
 	right: 4rem;
 	bottom: 0;
 	margin: 1rem;
@@ -261,6 +262,7 @@ a:hover {
 	opacity: 0;
 	visibility: hidden;
 	overflow: hidden auto;
+	box-shadow: 0 0 1rem 1rem rgba(0,0,0,.1);
 }
 #guide.open {
 	opacity: 1;
@@ -484,7 +486,9 @@ a:hover {
 	}
 	#guide {
 		top: 4rem;
+		left: 0;
 		right: 0;
+		bottom: 8rem;
 	}
 	.legend {
 		flex-direction: row;
