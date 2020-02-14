@@ -30,7 +30,8 @@ require(["pace.min","leaflet"],function(){
 					return L.divIcon({className:"icon-cluster " + storeClass[order],iconSize:[72,30]});
 				},
 				removeOutsideVisibleBounds: true,
-				animate: true
+				animate: true,
+				maxClusterRadius: 45
 			}),
 			childrenStat = false,
 			usrLocationStat = false;
@@ -106,13 +107,13 @@ require(["pace.min","leaflet"],function(){
 					}
 				}
 				let storeName = L.DomUtil.create("p","store-name",popupContent),
-					storeAddr = L.DomUtil.create("p","store-address",popupContent),
-					storePhon = L.DomUtil.create("p","store-phone",popupContent),
-					storeUpda = L.DomUtil.create("p","store-updated",popupContent);
+					storeAddr = L.DomUtil.create("p","store-address detail",popupContent),
+					storePhon = L.DomUtil.create("p","store-phone detail",popupContent),
+					storeUpda = L.DomUtil.create("p","store-updated detail",popupContent);
 					storeName.innerHTML = store.properties.name + "<span class='store-distance'></span>";
-					storeAddr.innerHTML = "<span class='fas fa-map-marked-alt'></span><a href='https://www.google.com/maps?q=" + store.properties.name + "+" + store.properties.address + "' target='_blank'>" + store.properties.address + "</a>";
-					storePhon.innerHTML = "<span class='fas fa-phone'></span><a href='tel:" + store.properties.phone + "'>" + store.properties.phone + "</a>";
-					storeUpda.innerHTML = "<span class='fas fa-sync-alt'></span>" + store.properties.updated;
+					storeAddr.innerHTML = "<span class='icon fas fa-map-marked-alt'></span><span class='text'><a href='https://www.google.com/maps?q=" + store.properties.name + "+" + store.properties.address + "' target='_blank'>" + store.properties.address + "</a></span>";
+					storePhon.innerHTML = "<span class='icon fas fa-phone'></span><span class='text'><a href='tel:" + store.properties.phone + "'>" + store.properties.phone + "</a></span>";
+					storeUpda.innerHTML = "<span class='icon fas fa-sync-alt'></span><span class='text'>" + store.properties.updated + "</span>";
 				marker.bindPopup(popupContent,popupConfig);
 				storeMarkers.addLayer(marker);
 			});

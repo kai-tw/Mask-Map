@@ -382,8 +382,13 @@ a:hover {
 	font-size: 1.5rem;
 	font-weight: bold;
 }
-#app .store-information > p span {
-	margin-right: .5rem;
+#app .store-information .detail {
+	display: flex;
+	align-items: center
+}
+#app .store-information .detail .icon {
+	margin-right: 1rem;
+	width: 1rem;
 }
 #app .store-information .store-name {
 	margin: 1rem .5rem;
