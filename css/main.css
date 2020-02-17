@@ -6,6 +6,18 @@
 	src:url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot);
 	src:url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff2) format("woff2"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff) format("woff"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.ttf) format("truetype"),url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.svg#fontawesome) format("svg")
 }
+.fas {font-family: 'Font Awesome 5 Free';font-weight: 900}
+.fa-chevron-up:before {content: "\f077"}
+.fa-child:before {content: "\f1ae"}
+.fa-location-arrow:before {content: "\f124"}
+.fa-plus:before {content: "\f067"}
+.fa-minus:before {content: "\f068"}
+.fa-question:before {content: "\f128"}
+.fa-map-marked-alt:before {content: "\f5a0"}
+.fa-phone:before {content: "\f095"}
+.fa-sync-alt:before {content: "\f2f1"}
+.fa-sticky-note:before {content: "\f249"}
+.fa-marker:before {content: "\f5a1"}
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -439,16 +451,6 @@ a:hover {
   width: 100%;
   height: 2px;
 }
-.fas {font-family: 'Font Awesome 5 Free';font-weight: 900}
-.fa-chevron-up:before {content: "\f077"}
-.fa-child:before {content: "\f1ae"}
-.fa-location-arrow:before {content: "\f124"}
-.fa-plus:before {content: "\f067"}
-.fa-minus:before {content: "\f068"}
-.fa-question:before {content: "\f128"}
-.fa-map-marked-alt:before {content: "\f5a0"}
-.fa-phone:before {content: "\f095"}
-.fa-sync-alt:before {content: "\f2f1"}
 
 @media screen and (max-width: 768px) {
 	html {
