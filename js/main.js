@@ -76,12 +76,9 @@ require(["pace.min","leaflet"],function(){
 				index[data.features[i].properties.id] = i;
 				data.features[i].properties.phone = data.features[i].properties.phone.replace(/ /g,"");
 			}
-			data.features[index["5931033130"]].geometry.coordinates = [121.517612,25.006090];
 			data.features[index["5931033176"]].geometry.coordinates = [121.518552,25.007578];
 			data.features[index["5931101455"]].geometry.coordinates = [121.461145,25.136232];
 			data.features[index["5931100092"]].geometry.coordinates = [121.461358,25.136273];
-			data.features[index["5931016004"]].geometry.coordinates = [121.464973,25.018357];
-			data.features[index["5931016004"]].properties.address = "新北市板橋區文化路1段116號";
 			data.features.forEach(function(store){
 				let storeLocation = [store.geometry.coordinates[1],store.geometry.coordinates[0]];
 				let marker = L.marker(storeLocation,{icon:storeIcon[markerOrder("adult",store.properties.mask_adult)]}),
