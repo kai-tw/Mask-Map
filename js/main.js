@@ -1,5 +1,8 @@
 'use strict';
 
+const MAX_ADULT_STOCK = 400,
+	  MAX_CHILD_STOCK = 200;
+
 require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
 		let map = L.map("app", {attributionControl:false,zoomControl:false,minZoom:3,maxZoom:19}),
@@ -172,10 +175,10 @@ function markerOrder(str,num) {
 	let rate;
 	switch (str) {
 	case "adult":
-		rate = num / 200;
+		rate = num / MAX_ADULT_STOCK;
 		return rate >= 0.5 ? 3 : rate >= 0.2 ? 2 : rate > 0 ? 1 : 0;
 	case "child":
-		rate = num / 50;
+		rate = num / MAX_CHILD_STOCK;
 		return rate >= 0.5 ? 3 : rate >= 0.2 ? 2 : rate > 0 ? 1 : 0;
 	}
 }
