@@ -1,6 +1,6 @@
 'use strict';
 
-const MAX_ADULT_STOCK = 400,
+const MAX_ADULT_STOCK = 600,
 	  MAX_CHILD_STOCK = 200;
 
 require(["pace.min","leaflet"],function(){
