@@ -34,7 +34,7 @@ require(["pace.min","leaflet"],function(){
 				},
 				removeOutsideVisibleBounds: true,
 				animate: true,
-				maxClusterRadius: 50
+				maxClusterRadius: 40
 			}),
 			childrenStat = false,
 			usrLocationStat = false;

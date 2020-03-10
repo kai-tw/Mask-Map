@@ -167,6 +167,9 @@ a:hover {
 	font-size: .9rem;
 	color: #555;
 }
+#description li {
+	margin: 1rem 0
+}
 #control-panel {
 	position: fixed;
 	right: 0;
