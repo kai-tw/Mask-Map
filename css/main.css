@@ -254,12 +254,12 @@ a:hover {
 #control-panel #menu:before,#control-panel #menu:after {
 	display: none;
 }
-#control-panel #mask-toggle.child {
+#control-panel #mask-toggle.child, #control-panel #current-location.keep-tracking {
 	border-color: rgb(16, 120, 121);
 	background: rgba(16, 120, 121, .8);
 	color: #fff;
 }
-#control-panel #mask-toggle.child:hover {
+#control-panel #mask-toggle.child:hover, #control-panel #current-location.keep-tracking:hover {
 	background: rgb(16, 120, 121);
 }
 #guide {

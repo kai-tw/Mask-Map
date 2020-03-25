@@ -1,7 +1,10 @@
 'use strict';
 
 const MAX_ADULT_STOCK = 600,
-	  MAX_CHILD_STOCK = 200;
+	  MAX_CHILD_STOCK = 200,
+	  FLY_TO_ZOOM = 16;
+	  
+let t;
 
 require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
@@ -37,7 +40,7 @@ require(["pace.min","leaflet"],function(){
 				maxClusterRadius: 40
 			}),
 			childrenStat = false,
-			usrLocationStat = false;
+			keepTrack = false;
 		
 		map.addLayer(osm);
 		
@@ -48,10 +51,27 @@ require(["pace.min","leaflet"],function(){
 		document.getElementById("zoom-in").addEventListener("click",function(){map.zoomIn()});
 		document.getElementById("zoom-out").addEventListener("click",function(){map.zoomOut()});
 		document.getElementById("current-location").addEventListener("click",function(){
-			if (usrLocationStat)
-				map.flyTo(currentMar.getLatLng(),16);
-			else
-				alert("定位資料取得失敗，故不能進行目前位置顯示");
+			this.classList.toggle("keep-tracking");
+			keepTrack = keepTrack ? false : true;
+			if (navigator.geolocation) {
+				let pos = navigator.geolocation.watchPosition(function(geo){
+					currentMar.setLatLng([geo.coords.latitude,geo.coords.longitude]);
+					currentMar.bindPopup("<p class='user-location'>目前位置</p><p class='loc-accuracy'>GPS 精確度："+Math.round(geo.coords.accuracy * 100) / 100+" 公尺</p>");
+					currentMar.addTo(map);
+					storeMarkers.eachLayer(function(layer){
+						layer.getPopup().getContent().getElementsByClassName("store-distance")[0].innerText = geoDistance([[geo.coords.latitude,geo.coords.longitude],[layer.getPopup().getContent().dataset.lat,layer.getPopup().getContent().dataset.lng]]);
+					});
+					if(keepTrack) {
+						map.flyTo(currentMar.getLatLng(),18);
+					}
+				},function(){
+					alert("定位資料取得失敗，故不能進行目前位置顯示");
+					storeMarkers.eachLayer(function(layer){
+						layer.getPopup().getContent().getElementsByClassName("store-distance")[0].innerText = "無定位無距離";
+					});
+					currentMar.remove();
+				},{enableHighAccuracy:true});
+			}
 		});
 		document.getElementById("menu").addEventListener("click",function(){
 			document.getElementById("information").classList.toggle("close");
@@ -62,11 +82,11 @@ require(["pace.min","leaflet"],function(){
 			childrenStat = (childrenStat) ? false : true;
 			if (childrenStat)
 				storeMarkers.eachLayer(function(layer){
-					layer.setIcon(storeIcon[markerOrder("child",layer._popup._content.getElementsByClassName("number")[1].innerText)]);
+					layer.setIcon(storeIcon[markerOrder("child",layer.getPopup().getContent().getElementsByClassName("number")[1].innerText)]);
 				});
 			else
 				storeMarkers.eachLayer(function(layer){
-					layer.setIcon(storeIcon[markerOrder("adult",layer._popup._content.getElementsByClassName("number")[0].innerText)]);
+					layer.setIcon(storeIcon[markerOrder("adult",layer.getPopup().getContent().getElementsByClassName("number")[0].innerText)]);
 				});
 			storeMarkers.refreshClusters();
 		});
@@ -115,25 +135,22 @@ require(["pace.min","leaflet"],function(){
 				storePhon.innerHTML = "<span class='icon fas fa-phone'></span><span class='text'><a href='tel:" + store.properties.phone + "'>" + store.properties.phone + "</a></span>";
 				storeUpda.innerHTML = "<span class='icon fas fa-sync-alt'></span><span class='text'>" + store.properties.updated + "</span>";
 				storeNote.innerHTML = "<span class='icon fas fa-sticky-note'></span><span class='text'>" + store.properties.note + "</span>";
-				marker.bindPopup(popupContent,popupConfig);
+				marker.bindPopup(popupContent,popupConfig).on("click",function(){
+					location.hash = this._popup._content.dataset.id;
+				});
 				storeMarkers.addLayer(marker);
 			});
-			if (navigator.geolocation) {
-				let pos = navigator.geolocation.watchPosition(function(geo){
-					currentMar.setLatLng([geo.coords.latitude,geo.coords.longitude]);
-					currentMar.bindPopup("<p class='user-location'>目前位置</p><p class='loc-accuracy'>GPS 精確度："+Math.round(geo.coords.accuracy * 100) / 100+" 公尺</p>");
-					currentMar.addTo(map);
-					storeMarkers.eachLayer(function(layer){
-						layer._popup._content.getElementsByClassName("store-distance")[0].innerText = geoDistance([[geo.coords.latitude,geo.coords.longitude],[layer._popup._content.dataset.lat,layer._popup._content.dataset.lng]]);
-					});
-					usrLocationStat = true;
-				},function(){
-					storeMarkers.eachLayer(function(layer){
-						layer._popup._content.getElementsByClassName("store-distance")[0].innerText = "無定位無距離";
-					});
-				},{enableHighAccuracy:true});
-			}
 			map.addLayer(storeMarkers);
+			if (location.hash != "") {
+				storeMarkers.eachLayer(function(layer){
+					let markerData = layer.getPopup().getContent().dataset;
+					if(markerData.id == location.hash.substr(1)) {
+						map.flyTo([markerData.lat,markerData.lng],FLY_TO_ZOOM);
+						map.once("moveend zoomend", function(){layer.openPopup()});
+					}
+				});
+			}
+			t = storeMarkers;
 			window.setInterval(function(){
 				let updator = new XMLHttpRequest;
 				index = {};
@@ -143,7 +160,7 @@ require(["pace.min","leaflet"],function(){
 						index[json.features[i].properties.id] = i;
 					}
 					storeMarkers.eachLayer(function(layer){
-						let dom = layer._popup._content,
+						let dom = layer.getPopup().getContent(),
 							id = dom.dataset.id,
 							stat = json.features[index[id]],
 							con = dom.getElementsByClassName("container"),
