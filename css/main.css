@@ -459,41 +459,42 @@ a:hover {
 	html {
 		font-size: 16px
 	}
+	#app {
+		height: calc(100vh - 4rem);
+	}
 	#information {
 		top: 40%;
+		bottom: 4rem;
 		border-radius: 2rem 2rem 0 0;
 		width: 100%;
 	}
 	#information.close {
-		transform: translate(0,calc(100% - 8rem));
+		transform: translate(0,100%);
 	}
 	#control-panel {
+		margin: 0;
 		flex-direction: row;
-		top: 0;
+		justify-content: center;
 		left: 0;
-		right: unset;
-		bottom: unset;
+		background: #fff;
 	}
-	#control-panel button:before,#control-panel button:after {
+	#control-panel button {
+		border: none;
+	}
+	#control-panel button:before, #control-panel button:after {
 		display: none;
 	}
 	#control-panel #menu {
-		top: calc(40% - 4.5rem);
-		left: unset;
-		right: 1rem;
+		position: static;
 		transform: rotate(180deg);
 	}
 	#control-panel #menu.close {
-		top: calc(100% - 12.5rem);
-		left: unset;
-		right: 1rem;
 		transform: rotate(0);
 	}
 	#guide {
-		top: 4rem;
 		left: 0;
 		right: 0;
-		bottom: 8rem;
+		bottom: 4rem;
 	}
 	.legend {
 		flex-direction: row;
