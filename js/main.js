@@ -3,8 +3,6 @@
 const MAX_ADULT_STOCK = 600,
 	  MAX_CHILD_STOCK = 200,
 	  FLY_TO_ZOOM = 16;
-	  
-let t;
 
 require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
@@ -40,7 +38,7 @@ require(["pace.min","leaflet"],function(){
 				maxClusterRadius: 40
 			}),
 			childrenStat = false,
-			keepTrack = false;
+			locationPermit = false;
 		
 		map.addLayer(osm);
 		
@@ -51,8 +49,9 @@ require(["pace.min","leaflet"],function(){
 		document.getElementById("zoom-in").addEventListener("click",function(){map.zoomIn()});
 		document.getElementById("zoom-out").addEventListener("click",function(){map.zoomOut()});
 		document.getElementById("current-location").addEventListener("click",function(){
-			this.classList.toggle("keep-tracking");
-			keepTrack = keepTrack ? false : true;
+			if(locationPermit) {
+				map.flyTo(currentMar.getLatLng(),18);
+			}
 			if (navigator.geolocation) {
 				let pos = navigator.geolocation.watchPosition(function(geo){
 					currentMar.setLatLng([geo.coords.latitude,geo.coords.longitude]);
@@ -61,14 +60,13 @@ require(["pace.min","leaflet"],function(){
 					storeMarkers.eachLayer(function(layer){
 						layer.getPopup().getContent().getElementsByClassName("store-distance")[0].innerText = geoDistance([[geo.coords.latitude,geo.coords.longitude],[layer.getPopup().getContent().dataset.lat,layer.getPopup().getContent().dataset.lng]]);
 					});
-					if(keepTrack) {
-						map.flyTo(currentMar.getLatLng(),18);
-					}
+					locationPermit = true;
 				},function(){
 					alert("定位資料取得失敗，故不能進行目前位置顯示");
 					storeMarkers.eachLayer(function(layer){
 						layer.getPopup().getContent().getElementsByClassName("store-distance")[0].innerText = "無定位無距離";
 					});
+					locationPermit = false;
 					currentMar.remove();
 				},{enableHighAccuracy:true});
 			}
@@ -147,10 +145,10 @@ require(["pace.min","leaflet"],function(){
 					if(markerData.id == location.hash.substr(1)) {
 						map.flyTo([markerData.lat,markerData.lng],FLY_TO_ZOOM);
 						map.once("moveend zoomend", function(){layer.openPopup()});
+						break;
 					}
 				});
 			}
-			t = storeMarkers;
 			window.setInterval(function(){
 				let updator = new XMLHttpRequest;
 				index = {};
