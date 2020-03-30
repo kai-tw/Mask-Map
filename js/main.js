@@ -145,7 +145,7 @@ require(["pace.min","leaflet"],function(){
 					if(markerData.id == location.hash.substr(1)) {
 						map.flyTo([markerData.lat,markerData.lng],FLY_TO_ZOOM);
 						map.once("moveend zoomend", function(){layer.openPopup()});
-						break;
+						return this;
 					}
 				});
 			}
