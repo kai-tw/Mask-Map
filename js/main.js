@@ -19,7 +19,6 @@ require(["pace.min","leaflet"],function(){
 				L.icon({iconUrl:"images/sufficient.svg",iconSize:[48,48],iconAnchor:[24,48],popupAnchor:[0,-48]})
 			],
 			storeClass = ["sold-out","emergency","warning","sufficient"],
-			purchase = {day:["日","一","二","三","四","五","六"],parity:["不限","奇數","偶數","奇數","偶數","奇數","偶數"]},
 			xhr = new XMLHttpRequest(),
 			storeMarkers = L.markerClusterGroup({
 				iconCreateFunction: function(cluster) {
@@ -44,8 +43,6 @@ require(["pace.min","leaflet"],function(){
 		
 		map.setView([23.97565,120.97388], 6);
 		map.setMaxBounds([[90,-180], [-90,180]]);
-		document.getElementById("parity").innerText = purchase.parity[today.getDay()];
-		document.getElementById("day").innerText = "星期" + purchase.day[today.getDay()];
 		document.getElementById("zoom-in").addEventListener("click",function(){map.zoomIn()});
 		document.getElementById("zoom-out").addEventListener("click",function(){map.zoomOut()});
 		document.getElementById("current-location").addEventListener("click",function(){
@@ -178,8 +175,6 @@ require(["pace.min","leaflet"],function(){
 				});
 				updator.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
 				updator.send();
-				document.getElementById("parity").innerText = purchase.parity[today.getDay()];
-				document.getElementById("day").innerText = "星期" + purchase.day[today.getDay()];
 			},30000);
 		});
 		xhr.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
