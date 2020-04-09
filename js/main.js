@@ -4,7 +4,8 @@ const MAX_ADULT_STOCK = 600,
 	  MAX_CHILD_STOCK = 200,
 	  FLY_TO_ZOOM = 16;
 
-require(["pace.min","leaflet"],function(){
+window.addEventListener("load", function(){
+	require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
 		let map = L.map("app", {attributionControl:false,zoomControl:false,minZoom:3,maxZoom:19}),
 			osmUrl="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
@@ -131,7 +132,7 @@ require(["pace.min","leaflet"],function(){
 				storeUpda.innerHTML = "<span class='icon fas fa-sync-alt'></span><span class='text'>" + store.properties.updated + "</span>";
 				storeNote.innerHTML = "<span class='icon fas fa-sticky-note'></span><span class='text'>" + store.properties.note + "</span>";
 				marker.bindPopup(popupContent,popupConfig).on("click",function(){
-					location.hash = this._popup._content.dataset.id;
+					location.hash = this.getPopup().getContent().dataset.id;
 				});
 				storeMarkers.addLayer(marker);
 			});
@@ -140,8 +141,8 @@ require(["pace.min","leaflet"],function(){
 				storeMarkers.eachLayer(function(layer){
 					let markerData = layer.getPopup().getContent().dataset;
 					if(markerData.id == location.hash.substr(1)) {
-						map.flyTo([markerData.lat,markerData.lng],FLY_TO_ZOOM);
-						map.once("moveend zoomend", function(){layer.openPopup()});
+						map.setView([markerData.lat,markerData.lng],FLY_TO_ZOOM);
+						layer.openPopup();
 						return this;
 					}
 				});
@@ -180,6 +181,7 @@ require(["pace.min","leaflet"],function(){
 		xhr.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
 		xhr.send();
 	});
+});
 });
 function markerOrder(str,num) {
 	let rate;
