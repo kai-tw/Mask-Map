@@ -2,7 +2,7 @@
 
 const MAX_ADULT_STOCK = 1800,
 	  MAX_CHILD_STOCK = 200,
-	  FLY_TO_ZOOM = 16;
+	  FLY_TO_ZOOM = 19;
 
 window.addEventListener("load", function(){
 	require(["pace.min","leaflet"],function(){
