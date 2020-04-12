@@ -1,6 +1,6 @@
 'use strict';
 
-const MAX_ADULT_STOCK = 600,
+const MAX_ADULT_STOCK = 1800,
 	  MAX_CHILD_STOCK = 200,
 	  FLY_TO_ZOOM = 16;
 
