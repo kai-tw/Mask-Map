@@ -73,6 +73,11 @@ window.addEventListener("load", function(){
 			document.getElementById("information").classList.toggle("close");
 			this.classList.toggle("close");
 		});
+		document.getElementById("app").addEventListener("click", function () {
+			if (document.documentElement.clientWidth > 768 && !document.getElementById("information").classList.contains("close")) {
+				document.getElementById("information").classList.add("close");
+			}
+		});
 		document.getElementById("mask-toggle").addEventListener("click",function(){
 			this.classList.toggle("child");
 			childrenStat = (childrenStat) ? false : true;
