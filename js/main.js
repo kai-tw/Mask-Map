@@ -76,6 +76,7 @@ window.addEventListener("load", function(){
 		document.getElementById("app").addEventListener("click", function () {
 			if (document.documentElement.clientWidth <= 768 && !document.getElementById("information").classList.contains("close")) {
 				document.getElementById("information").classList.add("close");
+				document.getElementById("menu").classList.add("close");
 			}
 		});
 		document.getElementById("mask-toggle").addEventListener("click",function(){
