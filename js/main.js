@@ -74,7 +74,7 @@ window.addEventListener("load", function(){
 			this.classList.toggle("close");
 		});
 		document.getElementById("app").addEventListener("click", function () {
-			if (document.documentElement.clientWidth > 768 && !document.getElementById("information").classList.contains("close")) {
+			if (document.documentElement.clientWidth <= 768 && !document.getElementById("information").classList.contains("close")) {
 				document.getElementById("information").classList.add("close");
 			}
 		});
