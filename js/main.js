@@ -4,8 +4,7 @@ const MAX_ADULT_STOCK = 1800,
 	  MAX_CHILD_STOCK = 200,
 	  FLY_TO_ZOOM = 19;
 
-window.addEventListener("load", function(){
-	require(["pace.min","leaflet"],function(){
+require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
 		let map = L.map("app", {attributionControl:false,zoomControl:false,minZoom:3,maxZoom:19}),
 			osmUrl="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
@@ -188,7 +187,7 @@ window.addEventListener("load", function(){
 		xhr.send();
 	});
 });
-});
+
 function markerOrder(str,num) {
 	let rate;
 	switch (str) {
