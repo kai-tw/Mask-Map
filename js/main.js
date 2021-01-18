@@ -28,7 +28,7 @@ require(["pace.min","leaflet"],function(){
 						order = order < 3 && list[i].options.icon.options.iconUrl === storeIcon[3].options.iconUrl ? 3 :
 								order < 2 && list[i].options.icon.options.iconUrl === storeIcon[2].options.iconUrl ? 2 :
 								order < 1 && list[i].options.icon.options.iconUrl === storeIcon[1].options.iconUrl ? 1 :
-								list[i].options.icon.options.iconUrl === storeIcon[0] ? 0 : order;
+								list[i].options.icon.options.iconUrl === storeIcon[0].options.iconUrl ? 0 : order;
 					}
 					return L.divIcon({className:"icon-cluster " + storeClass[order],iconSize:[72,30]});
 				},
