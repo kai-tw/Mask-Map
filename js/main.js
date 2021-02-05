@@ -1,8 +1,9 @@
 'use strict';
 
 const MAX_ADULT_STOCK = 1800,
-	  MAX_CHILD_STOCK = 200,
-	  FLY_TO_ZOOM = 19;
+      MAX_CHILD_STOCK = 200,
+      FLY_TO_ZOOM = 19,
+      SOURCE_URL = "https://mask-availability-geojson.s3.amazonaws.com/masks.geojson";
 
 require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
@@ -178,11 +179,11 @@ require(["pace.min","leaflet"],function(){
 					});
 					storeMarkers.refreshClusters();
 				});
-				updator.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
+				updator.open("GET", SOURCE_URL + "?time=" + new Date().getTime());
 				updator.send();
 			},30000);
 		});
-		xhr.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json?time=" + new Date().getTime());
+		xhr.open("GET", SOURCE_URL + "?time=" + new Date().getTime());
 		xhr.send();
 	});
 });
