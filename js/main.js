@@ -3,7 +3,8 @@
 const MAX_ADULT_STOCK = 1800,
       MAX_CHILD_STOCK = 200,
       FLY_TO_ZOOM = 19,
-      SOURCE_URL = "https://data.nhi.gov.tw/Datasets/Download.ashx?rid=A21030000I-D50001-001&l=https://data.nhi.gov.tw/resource/mask/maskdata.csv";
+      UPDATE_DELAY = 30000,
+      SOURCE_URL = "https://data.nhi.gov.tw/resource/mask/maskdata.csv";
 
 require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
@@ -44,10 +45,10 @@ require(["pace.min","leaflet"],function(){
 			
 			map.addLayer(osm);
 			
-			map.setView([23.97565,120.97388], 6);
+			map.setView([23.97565,120.97388], 8);
 			map.setMaxBounds([[90,-180], [-90,180]]);
-			document.getElementById("zoom-in").addEventListener("click",function(){map.zoomIn()});
-			document.getElementById("zoom-out").addEventListener("click",function(){map.zoomOut()});
+			document.getElementById("zoom-in").addEventListener("click", () => {map.zoomIn()});
+			document.getElementById("zoom-out").addEventListener("click", () => {map.zoomOut()});
 			document.getElementById("current-location").addEventListener("click",function(){
 				if(locationPermit) {
 					map.flyTo(currentMar.getLatLng(),18);
@@ -60,12 +61,11 @@ require(["pace.min","leaflet"],function(){
 						storeMarkers.eachLayer(function(layer){
 							layer.getPopup().getContent().getElementsByClassName("store-distance")[0].innerText = geoDistance([[geo.coords.latitude,geo.coords.longitude],[layer.getPopup().getContent().dataset.lat,layer.getPopup().getContent().dataset.lng]]);
 						});
+						document.getElementById("app").classList.add("allow-location");
 						locationPermit = true;
 					},function(){
 						alert("定位資料取得失敗，故不能進行目前位置顯示");
-						storeMarkers.eachLayer(function(layer){
-							layer.getPopup().getContent().getElementsByClassName("store-distance")[0].innerText = "無定位無距離";
-						});
+						document.getElementById("app").classList.remove("allow-location");
 						locationPermit = false;
 						currentMar.remove();
 					},{enableHighAccuracy:true});
@@ -98,12 +98,13 @@ require(["pace.min","leaflet"],function(){
 				document.getElementById("guide").classList.toggle("open");
 			});
 			xhr.addEventListener("load", function(){
-				let data = JSON.parse(this.responseText),index = {};
-				for (let i = 0; i < data.features.length; i++) {
-					index[data.features[i].properties.id] = i;
-					data.features[i].properties.phone = data.features[i].properties.phone.replace(/ /g,"");
+				let temp = csvParse(this.responseText);
+				for (let i in geoCollection.features) {
+					let id = geoCollection.features[i].properties.id;
+					if (temp[id] == null) continue;
+					geoCollection.features[i].properties = temp[id];
 				}
-				data.features.forEach(function(store){
+				geoCollection.features.forEach(function(store){
 					let storeLocation = [store.geometry.coordinates[1],store.geometry.coordinates[0]];
 					let marker = L.marker(storeLocation,{icon:storeIcon[markerOrder("adult",store.properties.mask_adult)]}),
 						popupConfig = {maxWidth: "auto"},
@@ -132,41 +133,34 @@ require(["pace.min","leaflet"],function(){
 					let storeName = L.DomUtil.create("p","store-name",popupContent),
 						storeAddr = L.DomUtil.create("p","store-address detail",popupContent),
 						storePhon = L.DomUtil.create("p","store-phone detail",popupContent),
-						storeNote = L.DomUtil.create("p","store-note detail",popupContent),
 						storeUpda = L.DomUtil.create("p","store-updated detail",popupContent);
 					storeName.innerHTML = store.properties.name + "<span class='store-distance'></span>";
 					storeAddr.innerHTML = "<span class='icon fas fa-map-marked-alt'></span><span class='text'><a href='https://www.google.com/maps?q=" + store.properties.name + "+" + store.properties.address + "' target='_blank'>" + store.properties.address + "</a></span>";
 					storePhon.innerHTML = "<span class='icon fas fa-phone'></span><span class='text'><a href='tel:" + store.properties.phone + "'>" + store.properties.phone + "</a></span>";
 					storeUpda.innerHTML = "<span class='icon fas fa-sync-alt'></span><span class='text'>" + store.properties.updated + "</span>";
-					storeNote.innerHTML = "<span class='icon fas fa-sticky-note'></span><span class='text'>" + store.properties.note + "</span>";
 					marker.bindPopup(popupContent,popupConfig).on("click",function(){
 						location.hash = this.getPopup().getContent().dataset.id;
 					});
 					storeMarkers.addLayer(marker);
 				});
 				map.addLayer(storeMarkers);
-				if (location.hash != "") {
-					storeMarkers.eachLayer(function(layer){
-						let markerData = layer.getPopup().getContent().dataset;
-						if(markerData.id == location.hash.substr(1)) {
-							map.setView([markerData.lat,markerData.lng],FLY_TO_ZOOM);
-							layer.openPopup();
-							return this;
-						}
-					});
-				}
 				window.setInterval(function(){
 					let updator = new XMLHttpRequest;
-					index = {};
+					let index = {};
 					updator.addEventListener("load",function(){
-						let json = JSON.parse(this.responseText);
-						for (let i = 0; i < json.features.length; i++) {
-							index[json.features[i].properties.id] = i;
+						let temp = csvParse(this.responseText);
+						for (let i in geoCollection.features) {
+							let id = geoCollection.features[i].properties.id;
+							if (temp[id] == null) continue;
+							geoCollection.features[i].properties = temp[id];
+						}
+						for (let i in geoCollection["features"]) {
+							index[geoCollection.features[i].properties.id] = i;
 						}
 						storeMarkers.eachLayer(function(layer){
 							let dom = layer.getPopup().getContent(),
 								id = dom.dataset.id,
-								stat = json.features[index[id]],
+								stat = geoCollection.features[index[id]],
 								con = dom.getElementsByClassName("container"),
 								num = dom.getElementsByClassName("number"),
 								upd = dom.getElementsByClassName("store-updated")[0].children[1];
@@ -181,10 +175,21 @@ require(["pace.min","leaflet"],function(){
 								layer.setIcon(storeIcon[markerOrder("adult",stat.properties.mask_adult)]);
 						});
 						storeMarkers.refreshClusters();
+						console.log("Updated");
 					});
 					updator.open("GET", SOURCE_URL + "?time=" + new Date().getTime());
 					updator.send();
-				},30000);
+				},UPDATE_DELAY);
+				if (location.hash != "") {
+					storeMarkers.eachLayer(function(layer){
+						let markerData = layer.getPopup().getContent().dataset;
+						if(markerData.id == location.hash.substr(1)) {
+							map.setView([markerData.lat,markerData.lng],FLY_TO_ZOOM);
+							layer.openPopup();
+							return this;
+						}
+					});
+				}
 			});
 			xhr.open("GET", SOURCE_URL + "?time=" + new Date().getTime());
 			xhr.send();
@@ -213,4 +218,20 @@ function geoDistance(arr) {
 	
 	d = d > 1000 ? (d / 1000).toFixed(2) + "km" : d.toFixed(2) + "m";
 	return d;
+}
+function csvParse(str) {
+	let data = str.split(/\r?\n/), temp = new Object;
+	data.shift();
+	for (let i in data) {
+		let rawdata = data[i].split(",");
+		temp[rawdata[0]] = new Object;
+		temp[rawdata[0]]["id"] = rawdata[0];
+		temp[rawdata[0]]["name"] = rawdata[1];
+		temp[rawdata[0]]["address"] = rawdata[2];
+		temp[rawdata[0]]["phone"] = rawdata[3];
+		temp[rawdata[0]]["mask_adult"] = rawdata[4];
+		temp[rawdata[0]]["mask_child"] = rawdata[5];
+		temp[rawdata[0]]["updated"] = rawdata[6];
+	}
+	return temp;
 }

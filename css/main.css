@@ -425,6 +425,13 @@ a:hover {
 	color: #555;
 	background: #eee;
 	vertical-align: text-top;
+	visibility: hidden;
+	opacity: 0;
+	transition: all .2s ease;
+}
+#app.allow-location .store-distance {
+	visibility: visible;
+	opacity: 1;
 }
 .leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
 	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
