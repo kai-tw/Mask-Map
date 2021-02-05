@@ -3,6 +3,7 @@
 const MAX_ADULT_STOCK = 1800,
       MAX_CHILD_STOCK = 200,
       FLY_TO_ZOOM = 19,
+      INITIAL_ZOOM = 6,
       UPDATE_DELAY = 30000,
       SOURCE_URL = "https://data.nhi.gov.tw/resource/mask/maskdata.csv";
 
@@ -45,7 +46,7 @@ require(["pace.min","leaflet"],function(){
 			
 			map.addLayer(osm);
 			
-			map.setView([23.97565,120.97388], 8);
+			map.setView([23.97565,120.97388], INITIAL_ZOOM);
 			map.setMaxBounds([[90,-180], [-90,180]]);
 			document.getElementById("zoom-in").addEventListener("click", () => {map.zoomIn()});
 			document.getElementById("zoom-out").addEventListener("click", () => {map.zoomOut()});
