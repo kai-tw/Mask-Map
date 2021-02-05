@@ -3,7 +3,7 @@
 const MAX_ADULT_STOCK = 1800,
       MAX_CHILD_STOCK = 200,
       FLY_TO_ZOOM = 19,
-      SOURCE_URL = "https://mask-availability-geojson.s3.amazonaws.com/masks.geojson";
+      SOURCE_URL = "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json";
 
 require(["pace.min","leaflet"],function(){
 	require(["leaflet.markercluster"],function(){
