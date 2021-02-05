@@ -39,7 +39,8 @@ require(["pace.min","leaflet"],function(){
 					maxClusterRadius: 40
 				}),
 				childrenStat = false,
-				locationPermit = false;
+				locationPermit = false,
+				geoCollection = JSON.parse(this.responseText);
 			
 			map.addLayer(osm);
 			
@@ -188,7 +189,7 @@ require(["pace.min","leaflet"],function(){
 			xhr.open("GET", SOURCE_URL + "?time=" + new Date().getTime());
 			xhr.send();
 		});		
-		coordData.open("GET", "data/coordinates.json");
+		coordData.open("GET", "data/rawdata.json");
 		coordData.send();
 	});
 });
