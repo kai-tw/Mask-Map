@@ -334,6 +334,7 @@ a:hover {
 }
 #app .store-information {
 	position: relative;
+	line-height: 1.7;
 	z-index: 0
 }
 #app .store-information:before {
