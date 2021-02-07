@@ -141,7 +141,8 @@ require(["pace.min","leaflet"],function(){
 						marker.bindPopup(popupContent,popupConfig).on("click",function(){
 							location.hash = this.getPopup().getContent().dataset.id;
 						});
-						return marker;
+						if (store.properties.name)
+							return marker;
 					}
 				});
 				markerCluster.addLayer(markers);
