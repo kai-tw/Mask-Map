@@ -11,3 +11,4 @@
 
 1. [關於獨一無二網址和自動追蹤位置更新](https://www.facebook.com/story.php?story_fbid=3198871687004846&id=2328692494022774)
 2. [進度條高度增高以增加顯眼程度](https://www.facebook.com/kai73002981/posts/3283367935221887)
+3. [改成直接使用政府的資料](https://www.facebook.com/kai73002981/posts/3523870097838335)
