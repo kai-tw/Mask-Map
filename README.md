@@ -1,5 +1,5 @@
 # 台灣藥局口罩販售地圖
-由 [Kai Wu](https://www.facebook.com/kai73002981) 開發。
+由 [Kai](https://www.facebook.com/kai73002981) 開發。
 
 地圖網址：在右欄那裏。
 
